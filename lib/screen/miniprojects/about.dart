@@ -12,7 +12,6 @@ class AboutMe extends StatefulWidget {
 class _AboutMeState extends State<AboutMe> {
   double opacity = 0;
   @override
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +32,13 @@ class _AboutMeState extends State<AboutMe> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Center(
-                  child: CircleAvatar(
-                    radius: 50,
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: CircleAvatar(
+                      radius: 50,
+                      child: Image.asset('assets/images/1690297909708.jpeg'),
+                    ),
                   ),
                 ),
                 Container(
@@ -49,8 +52,7 @@ class _AboutMeState extends State<AboutMe> {
                 ),
                 const Text(
                   introduction,
-                  style: TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                 ).animate().fadeIn(duration: const Duration(milliseconds: 500))
               ],
             ),

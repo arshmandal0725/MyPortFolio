@@ -4,9 +4,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:rive/rive.dart';
 
 class Rain extends StatefulWidget {
-  const Rain({super.key, required this.top, required this.oposite});
+  const Rain({super.key, required this.top, required this.opposite});
   final double top;
-  final bool oposite;
+  final bool opposite;
+
   @override
   State<Rain> createState() => _RainState();
 }
@@ -17,10 +18,8 @@ class _RainState extends State<Rain> {
   Artboard? waterArtBoard;
 
   void playRain() {
-    if (rain?.value == false) {
-      rain?.value = true;
-    } else if (rain?.value == true) {
-      rain?.value = false;
+    if (rain != null) {
+      rain!.value = !rain!.value;
     }
   }
 
@@ -28,24 +27,31 @@ class _RainState extends State<Rain> {
   void initState() {
     super.initState();
 
-    rootBundle.load('assets/riv/rain.riv').then((data) {
+    _loadRiveFile();
+  }
+
+  Future<void> _loadRiveFile() async {
+    try {
+      final data = await rootBundle.load('assets/riv/rain.riv');
       final file = RiveFile.import(data);
       final artBoard = file.mainArtboard;
-      var controller =
-          StateMachineController.fromArtboard(artBoard, 'State Machine 1');
+      var controller = StateMachineController.fromArtboard(artBoard, 'State Machine 1');
 
       if (controller != null) {
-        // do something here matey
         artBoard.addController(controller);
-        rain = controller.findInput('isPressed');
-        hover = controller.findInput('isHover');
+        rain = controller.findInput<bool>('isPressed');
+        hover = controller.findInput<bool>('isHover');
         rain?.value = false;
         hover?.value = false;
+
+        setState(() {
+          waterArtBoard = artBoard;
+        });
       }
-      setState(() {
-        waterArtBoard = artBoard;
-      });
-    });
+    } catch (e) {
+      // Handle the error by logging or displaying an error message
+      debugPrint('Error loading Rive file: $e');
+    }
   }
 
   @override
@@ -54,21 +60,18 @@ class _RainState extends State<Rain> {
     return TweenAnimationBuilder(
       duration: const Duration(seconds: 600),
       tween: Tween(
-          begin: widget.oposite ? size.width.toDouble() - 150 : 0.0,
-          end: widget.oposite ? 0.0 : size.width.toDouble() - 150),
+        begin: widget.opposite ? size.width - 150 : 0.0,
+        end: widget.opposite ? 0.0 : size.width - 150,
+      ),
       builder: (context, value, _) {
         return Positioned(
           top: widget.top,
           right: value,
           child: MouseRegion(
-            onEnter: (_) {
-              hover?.value = true;
-            },
-            onExit: (_) {
-              hover?.value = false;
-            },
+            onEnter: (_) => hover?.value = true,
+            onExit: (_) => hover?.value = false,
             child: GestureDetector(
-              onTap: () => playRain(),
+              onTap: playRain,
               child: SizedBox(
                 height: 100,
                 width: 220,
@@ -83,9 +86,9 @@ class _RainState extends State<Rain> {
             ),
           ),
         )
-            .animate()
-            .fadeIn(delay: 1.5.seconds, duration: .35.seconds)
-            .slide(begin: const Offset(0, .2));
+        .animate()
+        .fadeIn(delay: 1.5.seconds, duration: .35.seconds)
+        .slide(begin: const Offset(0, .2));
       },
     );
   }

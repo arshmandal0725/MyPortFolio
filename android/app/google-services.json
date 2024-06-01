@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968286872384",
+    "project_id": "myportfolio-6a172",
+    "storage_bucket": "myportfolio-6a172.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968286872384:android:5ed024e3b9c344424cd0a5",
+        "android_client_info": {
+          "package_name": "com.high.app.awesome_portfolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVk1ND_wpKuRjkaWCNVM87ijxgx1_qqro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

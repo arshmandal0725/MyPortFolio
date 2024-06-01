@@ -84,7 +84,7 @@ List<AppModel> apps = [
   const AppModel(
       title: 'About',
       color: Colors.white,
-      icon: Icons.person,
+      assetPath: 'assets/images/1690297909708.svg',
       screen: AboutMe()),
   const AppModel(
       screen: Skills(),
@@ -213,11 +213,11 @@ final List<JobExperience> education = [
 ];
 
 List projects = [
-  Project(
-      color: Colors.yellow,
-      title: 'DhanManthan',
-      image: '',
-      bulletPoints: ['A', 'B', 'C']),
+  Project(color: Colors.yellow, title: 'DhanManthan', image: '', bulletPoints: [
+    """Integrated financial, literacy and mentorship, enabling users to earn points through knowledge
+sharing.""",
+    """Utilised Flutter, Firebase, and GitHub, achieving a seamless user interface.""",
+  ]),
   Project(
       color: Colors.blue,
       title: 'WeChat',
@@ -239,11 +239,10 @@ final List<JobExperience> jobExperiences = [
     startDate: 'Augest 2023',
     endDate: 'October 2023',
     bulletPoints: [
-      "Actively develop and manage push notifications to engage users effectively.",
-      "Successfully set up in-app purchase functionality for both iOS and Android platforms.",
-      "Utilize the Provider package for streamlined state management and implement real-time data streams.",
-      "Employ Amplitude and Firebase Analytics to track and analyze user behavior, informing data-driven decisions.",
-      "The Startup has over 3,00,000 lakh active users",
+      """Developed fire prevention mobile app for Syncverse, using Flutter and Firebase, enhancing safety
+in hotels and public areas.""",
+      """Achieved real-time data sync, boosting efficiency.""",
+      """Proactively learned and implemented innovative solutions, ensuring continuous improvement."""
     ],
   ),
   // Add more job experiences here...
@@ -255,23 +254,21 @@ final List<JobExperience> jobExperiences = [
     startDate: 'Sep. 2024',
     endDate: 'Present',
     bulletPoints: [
-      "Establish voice calling functionality using Agora SDK to enable real-time communication within the app.",
-      "Implement intricate animations using Rive, enhancing the app's visual appeal and engagement.",
-      "Collaborate directly with Stanza Living's CTO, gaining insights into industry best practices and cutting-edge technologies.",
-      "Acquire proficiency in server-driven UI setup, optimizing app flexibility and scalability through dynamic configuration.",
+      """Led website development at Quizbizz, enhancing online presence.""",
+      """Managed all technical tasks for seamless execution."""
     ],
   ),
   JobExperience(
     color: Colors.orangeAccent,
     location: "Remote",
-    title: 'Video Editor',
+    title: 'Core Team Member',
     company: 'Google Developer Student Club',
     startDate: 'Sep. 2022',
     endDate: 'July 2023',
     bulletPoints: [
-      "Collaborated with founders to develop a HealthifyMe clone, demonstrating strong teamwork and app development skills.",
-      "Engineered complex animations to enhance user experience and app visual appeal.",
-      "Played an active role in system design processes, contributing to efficient and scalable app architecture.",
+      """Successfully organized coding competitions and workshops.""",
+      """Coordinate logistics such as venue booking, catering, and technical requirements for events.""",
+      """Improved social media presence, resulting in increase of followers and engagement.""",
     ],
   ),
   JobExperience(
@@ -282,8 +279,9 @@ final List<JobExperience> jobExperiences = [
     startDate: 'june 2021',
     endDate: 'june 2022',
     bulletPoints: [
-      "Collaborated as a team member in developing a cryptocurrency wallet, akin to Trust Wallet, showcasing strong teamwork and blockchain app development expertise.",
-      "Proficiently integrated REST APIs into the application, enhancing its functionality and connectivity with external services."
+      """Facilitated communication between the campus and GeeksforGeeks, fostering a strong
+community.""",
+      """Developed and delivered presentations on various technical topics to promote coding culture."""
     ],
   ),
 ];
@@ -295,4 +293,14 @@ const String resumeLink =
     "https://drive.google.com/file/d/1ZuRnqy67oyXkYG_4FMOHLzzvC5vmGTSc/view?usp=sharing";
 const String email = "arshmandal07@gmail.com";
 const String instaGram = "https://www.instagram.com/arsh_mandal25/";
-const String introduction = 'I am Arsh Kumar Mandal';
+const String introduction = """
+Hello! My name is Arsh Kumar Mandal, and I am a passionate Flutter developer with 1.5 years of experience in creating robust, high-quality mobile applications. My journey in mobile development began with a fascination for building intuitive and user-friendly apps, and I have honed my skills in using Flutter to bring innovative ideas to life.
+
+Throughout my career, I have worked on diverse projects that demonstrate my ability to design, develop, and deploy apps that meet user needs. My portfolio includes notable projects, showcasing my expertise in Dart programming, UI/UX design, and API integration.
+
+Currently I am doing B.Tech in ETC from B.I.T,Durg. Additionally, I continually enhance my skills through courses and workshops to stay current with the latest advancements in Flutter and mobile app development.
+
+I am committed to excellence, creativity, and continuous learning, and I am excited about the opportunity to contribute to your projects. Please explore my portfolio and contact me to discuss potential collaborations.
+
+Thank you for visiting 😊 !
+""";

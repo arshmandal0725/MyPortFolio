@@ -8,6 +8,7 @@ import 'package:awesome_portfolio/widgets/rain_cloud.dart';
 import 'package:custom_button_builder/custom_button_builder.dart';
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -42,8 +43,8 @@ class HomePage extends StatelessWidget {
           ),
           size.height > 600
               ? const Rain(
-                  oposite: false,
                   top: 300,
+                  opposite: false,
                 )
               : Container(),
           Selector<CurrentState, String>(
@@ -59,16 +60,20 @@ class HomePage extends StatelessWidget {
           ),
           size.height > 600
               ? const Rain(
-                  oposite: true,
                   top: 50,
+                  opposite: true,
                 )
               : Container(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 10,
-              ),
+              phone
+                  ? const SizedBox(
+                      height: 100,
+                    )
+                  : const SizedBox(
+                      height: 10,
+                    ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -182,22 +187,56 @@ class HomePage extends StatelessWidget {
                         ),
 
                   // main mobile screen
-                  SizedBox(
-                    height: size.height - 100,
-                    child: Consumer<CurrentState>(
-                      // selector: (context, provider) => provider.currentDevice,
-                      builder: (context, _, __) {
-                        return DeviceFrame(
-                          device: currentState.currentDevice,
-                          screen: Container(
-                              decoration: BoxDecoration(
-                                  gradient: currentState.bgGradient),
-                              child: ScreenWrapper(
-                                  childG: currentState.currentScreen)),
-                        );
-                      },
-                    ),
-                  ),
+                  phone
+                      ? Column(
+                          children: [
+                            Text(
+                              'Open in Laptop 💻 for better experience 😊!..',
+                              style: TextStyle(
+                                  fontSize: size.width * 0.04,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              height: size.height - 250,
+                              child: Consumer<CurrentState>(
+                                // selector: (context, provider) => provider.currentDevice,
+                                builder: (context, _, __) {
+                                  return DeviceFrame(
+                                    device: currentState.currentDevice ==
+                                            Devices.ios.iPad
+                                        ? Devices.ios.iPhone13
+                                        : currentState.currentDevice,
+                                    screen: Container(
+                                        decoration: BoxDecoration(
+                                            gradient: currentState.bgGradient),
+                                        child: ScreenWrapper(
+                                            childG:
+                                                currentState.currentScreen)),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      : SizedBox(
+                          height: size.height - 100,
+                          child: Consumer<CurrentState>(
+                            // selector: (context, provider) => provider.currentDevice,
+                            builder: (context, _, __) {
+                              return DeviceFrame(
+                                device: currentState.currentDevice,
+                                screen: Container(
+                                    decoration: BoxDecoration(
+                                        gradient: currentState.bgGradient),
+                                    child: ScreenWrapper(
+                                        childG: currentState.currentScreen)),
+                              );
+                            },
+                          ),
+                        ),
 
                   /// Right side frosted containers
                   phone
@@ -320,34 +359,63 @@ class HomePage extends StatelessWidget {
                   builder: (context, _, __) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ...List.generate(devices.length, (index) {
-                          return CustomButton(
-                            pressed: currentState.currentDevice ==
-                                    devices[index].device
-                                ? Pressed.pressed
-                                : Pressed.notPressed,
-                            animate: true,
-                            borderRadius: 100,
-                            isThreeD: true,
-                            backgroundColor: Colors.black,
-                            width: 37.5,
-                            height: 37.5,
-                            onPressed: () {
-                              currentState.changeSelectedDevice(
-                                devices[index].device,
-                              );
-                            },
-                            child: Center(
-                              child: Icon(
-                                devices[index].icon,
-                                color: Colors.white,
-                                size: 25,
-                              ),
-                            ),
-                          );
-                        })
-                      ],
+                      children: phone
+                          ? [
+                              ...List.generate(2, (index) {
+                                return CustomButton(
+                                  pressed: currentState.currentDevice ==
+                                          devices[index].device
+                                      ? Pressed.pressed
+                                      : Pressed.notPressed,
+                                  animate: true,
+                                  borderRadius: 100,
+                                  isThreeD: true,
+                                  backgroundColor: Colors.black,
+                                  width: 37.5,
+                                  height: 37.5,
+                                  onPressed: () {
+                                    currentState.changeSelectedDevice(
+                                      devices[index].device,
+                                    );
+                                  },
+                                  child: Center(
+                                    child: Icon(
+                                      devices[index].icon,
+                                      color: Colors.white,
+                                      size: 25,
+                                    ),
+                                  ),
+                                );
+                              })
+                            ]
+                          : [
+                              ...List.generate(devices.length, (index) {
+                                return CustomButton(
+                                  pressed: currentState.currentDevice ==
+                                          devices[index].device
+                                      ? Pressed.pressed
+                                      : Pressed.notPressed,
+                                  animate: true,
+                                  borderRadius: 100,
+                                  isThreeD: true,
+                                  backgroundColor: Colors.black,
+                                  width: 37.5,
+                                  height: 37.5,
+                                  onPressed: () {
+                                    currentState.changeSelectedDevice(
+                                      devices[index].device,
+                                    );
+                                  },
+                                  child: Center(
+                                    child: Icon(
+                                      devices[index].icon,
+                                      color: Colors.white,
+                                      size: 25,
+                                    ),
+                                  ),
+                                );
+                              })
+                            ],
                     );
                   })
             ],

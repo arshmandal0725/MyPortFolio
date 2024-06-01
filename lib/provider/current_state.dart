@@ -4,8 +4,6 @@ import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-
 class CurrentState extends ChangeNotifier {
   DeviceInfo currentDevice = Devices.ios.iPhone13;
   String selectedCloud = "assets/images/cloudBlue.svg";
@@ -36,9 +34,7 @@ class CurrentState extends ChangeNotifier {
     Uri url = Uri.parse(link);
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
-    } else {
-      print('Could not launch $url');
-    }
+    } else {}
   }
 
   void changePhoneScreen(Widget change, bool isMain, {String? titlee}) {

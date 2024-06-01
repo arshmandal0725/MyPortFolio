@@ -1,24 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content=""A new Flutter project."">
+  <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,26 +19,48 @@
   <title>awesome_portfolio</title>
   <link rel="manifest" href="manifest.json">
 
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCof9m0vCNjD95RI0iz1oY4o0Y4e6rA4cI",
+      authDomain: "myportfolio-6a172.firebaseapp.com",
+      projectId: "myportfolio-6a172",
+      storageBucket: "myportfolio-6a172.appspot.com",
+      messagingSenderId: "968286872384",
+      appId: "1:968286872384:web:3e4b2f351fcf127f4cd0a5",
+      measurementId: "G-0FECGTPNP7"
+    };
+
+    // Initialize Firebase if it hasn't been initialized already
+    if (!getApps().length) {
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    }
   </script>
-  <!-- This script adds the flutter initialization JS code -->
+
+  <script>
+    const serviceWorkerVersion = '{{flutter_service_worker_version}}';
+  </script>
+
   <script src="flutter.js" defer></script>
 </head>
 <body>
   <script>
     window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=' + serviceWorkerVersion);
+      }
+
+      window.FlutterLoader.load({
+        entrypoint: 'main.dart.js'
+      }).then(function(engine) {
+        engine.initializeEngine().then(function(appRunner) {
+          appRunner.runApp();
+        });
       });
     });
   </script>

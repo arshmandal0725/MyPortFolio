@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screen/homescreen/home_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+   
   runApp(const Portfolio());
 }
 
@@ -19,8 +21,9 @@ class Portfolio extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CurrentState())
       ],
       child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: HomePage(),
       ),
     );
   }
-}
+} 
